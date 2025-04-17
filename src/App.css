@@ -44,11 +44,11 @@ body, html {
   background-repeat: no-repeat;
   overflow: hidden;
   width: 100vw; /* Use viewport width to ensure full screen width */
-  margin: 0; /* Remove all margins */
+  margin: 0 ; /* Remove all margins */
   left: 50%; /* Center the container */
   right: 50%; /* Center the container */
   margin-left: -50vw; /* Offset to ensure full width */
-  margin-right: -50vw; /* Offset to ensure full width */
+  margin-right: -50vw ; /* Offset to ensure full width */
   margin-top: 30px;
 }
 

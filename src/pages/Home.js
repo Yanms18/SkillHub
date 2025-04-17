@@ -156,9 +156,9 @@ function Home() {
           </li>
         </ol> */}
         <FAQ/>
-        <Footer/>
+        
       {/* </div> */}
-      
+      <Footer/>
     </div>
   );
 }
