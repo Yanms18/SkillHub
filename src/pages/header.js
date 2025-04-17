@@ -18,9 +18,11 @@ import ConsumerBTN from './consumerbtn';
 import Nextstep from './nextstep';
 import Laststep from './laststep';
 import Consumerpages from '../consumerpages';
+import Hire from './hirepage';
+import HiringartisanPage from './hiringartisanpage';
 function Header() {
   const { tradespeople } = useTrades();
-  const tradesperson = tradespeople[0]; // Using the first tradesperson as default
+  const tradesperson = tradespeople[2]; // Using the first tradesperson as default
   
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -139,7 +141,8 @@ function Header() {
          <Route path="/nextstep" element={< Nextstep />} /> 
          <Route path="/laststep" element={< Laststep  />} />
          <Route path="/consumerpages" element={< Consumerpages  />} />
-
+         <Route path="/hirepage" element={< Hire  />} /> 
+         <Route path="/hiringartisanPage/:id" element={< HiringartisanPage   />} /> 
         <Route path="*" element={<NotFound />} />
       
       </Routes>

@@ -16,6 +16,9 @@ const ViewProfile = () => {
     setTimeout(() => navigate('/'), 2000); // Redirect after 2 seconds
     return <p>Profile not found. Redirecting...</p>;
   }
+  function hireArtisanpage(){
+    navigate(`/hiringartisanPage/${id}`)
+  }
 
   return ( 
     <div className="div">
@@ -50,7 +53,7 @@ const ViewProfile = () => {
         </div>
         
         <div className="profile-actions">
-          <button className="hire-btn">Hire</button>
+          <button className="hire-btn" onClick={hireArtisanpage}>Hire</button>
           <button className="viewPort-btn">View Portfolio</button>
           <button     onClick={() => navigate("/chatbox")}  className="message-btn">Message</button>
           <button className="emoji-btn">

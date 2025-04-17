@@ -1,11 +1,16 @@
-.footer{
-   
-position: absolute;
-width: 1440px;
-height: 445px;
-left: calc(50% - 1440px/2);
+.footer {
+    width: 100%; /* Takes full width of parent */
+    height: 1200px;
+    margin: 0;
+    background: #0575E6;
+    position: relative; /* Or remove position entirely */
+    overflow: hidden;
+    width: 200vw; /* Use viewport width to ensure full screen width */
+    margin: 0; /* Remove all margins */
+    left: -70%; /* Center the container */
+    right: 50%; /* Center the container */
+    margin-left: -90vw; /* Offset to ensure full width */
+    margin-right: -70vw; /* Offset to ensure full width */
 
-
-background: #0575E6;
-
-}
+  }
+  

@@ -4,7 +4,7 @@ function Review() {
   const reviewers = [
     {
       id: 1,
-      image: "./revImage/fullhair.png", 
+      image: "./images/hair.png", 
       user: "Aisha O",
       caption: "Super happy with the results",
       stars: "★★★★★",
@@ -12,7 +12,7 @@ function Review() {
     },
     {
       id: 2,
-      image: "./revImage/black.png", 
+      image: "./images/blackman.png", 
       user: "Nneka E",
       caption: "Super happy with the results",
       stars: "★★★★★",
@@ -20,7 +20,7 @@ function Review() {
     },
     {
       id: 3,
-      image: "./revImage/glass.png",
+      image: "./images/panama.png",
       user: "David K",
       caption: "Super happy with the results",
       stars: "★★★★★",
@@ -28,7 +28,7 @@ function Review() {
     },
     {
       id: 4,
-      image: "./revImage/caper.png", 
+      image: "./images/dreadhair.png", 
       user: "Olumide I",
       caption: "Super happy with the results",
       stars: "★★★★☆",
