@@ -11,10 +11,6 @@
   --debug-colour: #add8e6;
 }
 
-/* .main-container {
-  margin-top: 0;
-} */
-
 .hiring-form-container {
   width: 100%;
   display: flex;
@@ -53,6 +49,7 @@
 .text-area-input {
   width: 100%;
   min-height: 300px;
+  display: flex;
 }
 
 .hire-form-input-field:focus {
@@ -242,6 +239,10 @@ input[type="checkbox"]:checked + label:after {
     margin-top: 100px;
   }
 
+  .hiring-form-container {
+    padding: 0 10px;
+  }
+
   .hire-page-form-row {
     flex-direction: column;
     width: 100%;
@@ -275,6 +276,10 @@ input[type="checkbox"]:checked + label:after {
 @media (max-width: 400px) {
   .main-container {
     margin-top: 100px;
+  }
+
+  .hiring-form-container {
+    padding: 0 10px;
   }
 
   .hire-page-form-row {

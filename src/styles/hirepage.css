@@ -8,6 +8,7 @@
   --red: red;
   --completion-green: #008000;
   --debug-colour: #add8e6;
+  --radio-hover-blue: #60a0e133;
 }
 
 /* Base styles for payment section */
@@ -25,8 +26,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .hirepage h1 {
@@ -73,6 +75,7 @@
 .radiogroup:hover {
   border: 1px solid var(--skillhub-blue);
   box-shadow: 0px 6px 12px rgba(5, 117, 230, 0.2);
+  background-color: var(--radio-hover-blue);
 }
 
 .radiogroup:active {
@@ -98,7 +101,7 @@
   flex: 1;
   font-size: 1rem;
   font-weight: 500;
-  color: #333;
+  color: var(--black);
   cursor: pointer;
 }
 

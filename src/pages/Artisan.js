@@ -76,7 +76,10 @@ function Artisan() {
   if (loading)
     return <div className="loading-container">Loading Artisans...</div>;
   if (error) return <div className="error-container">Error: {error}</div>;
-
+  // const [isOpen, setIsOpen] = useState(false);
+  
+  // const openModal = () => setIsOpen(true);
+  // const closeModal = () => setIsOpen(false);
   return (
     <div className="artisan-container">
       {/* <h1 className="artisan-heading">Artisans List</h1> */}
@@ -100,6 +103,7 @@ function Artisan() {
 
         {/* Filter Button */}
         <button className="artisan-page-filter-button">
+          
           <div className="filter-icon-container">
             <svg
               className="filter-icon"
@@ -117,7 +121,9 @@ function Artisan() {
           </div>
           FILTER
         </button>
+      
       </div>
+      
 
       {/* Lazy loading */}
       {isSearching ? (
@@ -157,7 +163,7 @@ function Artisan() {
                       {user.ratings || "No ratings yet"}
                     </p>
                     <p className="artisan-page-personP">
-                      {user.skill || "Unknown Skill"}
+                      {user.skill || "Not specified"}
                     </p>
 
                     {/* View profile button */}

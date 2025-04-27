@@ -13,7 +13,7 @@ function Hire() {
       <div className="hirepage">
         <div className="header">
           <h1>Payment Option</h1>
-          <h3>How do you want to pay?</h3>
+          <p>How do you want to pay?</p>
         </div>
 
         <div className="radios">
@@ -94,7 +94,9 @@ function Hire() {
           </button>
         </div>
       </div>
-      <Footer />
+
+      {/* Footer */}
+      {/* <Footer /> */}
     </>
   );
 }

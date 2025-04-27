@@ -241,7 +241,7 @@ function ConsumerNextPage() {
             className="dashed-border profile-image-icon-file-button-container"
             onClick={triggerFileInput}
           >
-            <img
+            <img 
               className="profile-image-icon"
               src={formData.photoURL || "/images/camera.png"}
               alt="Profile Image Upload"
@@ -501,11 +501,19 @@ function ConsumerNextPage() {
         .profile-image-icon-file-button-container {
           cursor: pointer;
           transition: all 0.2s ease;
+          height : 200px;
+          width:200px
         }
 
         .profile-image-icon-file-button-container:hover {
           opacity: 0.8;
         }
+          .profile-image-icon{
+          height:198px;
+          width:199px;
+          border-radius:100%;
+        
+          }
       `}</style>
     </div>
   );

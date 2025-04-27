@@ -220,11 +220,19 @@
 .profile-image-icon-file-button-container {
   cursor: pointer;
   transition: all 0.2s ease;
+  height: 200px;
+  width: 200px;
 }
 
 .profile-image-icon-file-button-container:hover {
   opacity: 0.8;
 }
+.profile-image-icon{
+  height:198px;
+  width:199px;
+  border-radius:100%;
+
+  }
 
 /* Tablet Responsiveness */
 @media (min-width: 481px) and (max-width: 1024px) {
