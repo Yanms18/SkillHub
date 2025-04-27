@@ -23,6 +23,7 @@ import HiringartisanPage from './hiringartisanpage';
 import ConsumerNextPage from './consumerNextpage';
 import ConsumerVerificationPage from './consumerVericationPage';
 import Dashboard from '../loginSection/dashboard';
+import PaymentCallback from './PaymentCallback';
 function Header() {
   const { tradespeople } = useTrades();
   const tradesperson = tradespeople[2]; // Using the first tradesperson as default
@@ -146,6 +147,7 @@ function Header() {
          <Route path="/consumerNextpage" element={ <ConsumerNextPage/>} />
         <Route path="/consumerVericationPage" element={<ConsumerVerificationPage />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/PaymentCallback" element={<PaymentCallback />} />
 
         <Route path="*" element={<NotFound />} />
       

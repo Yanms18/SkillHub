@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTrades } from "../TradesContext";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/hiringartisanPage.css";
 
 function HiringartisanPage() {
@@ -9,6 +10,9 @@ function HiringartisanPage() {
   const navigate = useNavigate();
   const [person, setPerson] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   // Form state to track input values
   const [formData, setFormData] = useState({
@@ -24,9 +28,6 @@ function HiringartisanPage() {
 
   // Load user data from multiple sources
   useEffect(() => {
-    console.log("Looking for tradesperson with ID:", id);
-
-    // First try to find the person in tradespeople context
     let foundPerson =
       tradespeople && tradespeople.length > 0
         ? tradespeople.find(
@@ -34,15 +35,11 @@ function HiringartisanPage() {
           )
         : null;
 
-    // If not found in context, try sessionStorage
     if (!foundPerson) {
       try {
         const storedPerson = sessionStorage.getItem("selectedTradesPerson");
         if (storedPerson) {
           const parsedPerson = JSON.parse(storedPerson);
-          console.log("Found person in sessionStorage:", parsedPerson);
-
-          // Check if this is the person we're looking for
           if (
             parsedPerson.id === id ||
             parsedPerson.id === parseInt(id) ||
@@ -74,18 +71,47 @@ function HiringartisanPage() {
   };
 
   // Handle form submission
-  const handleSubmit = (e, action) => {
+  const handleSubmit = async (e, action) => {
     e.preventDefault();
-    console.log("Form submitted with action:", action);
-    console.log("Form data:", formData);
+    setSubmitting(true);
+    setError("");
+    setSuccess(false);
 
-    // Here you would typically send this data to your backend
-    alert(
-      `${action} for ${person?.fname} ${person?.lname} submitted successfully!`
-    );
+    try {
+      const payload = {
+        ...formData,
+        artisanId: person?._id || person?.id || id,
+        artisanName: `${person?.fname || ""} ${person?.lname || ""}`,
+        action,
+      };
+
+console.log (payload)
+      const response = await axios.post(
+        "https://skillhub-api-y3gi.onrender.com/api/hiring/hire",
+        payload,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      if (response.status === 200 || response.status === 201) {
+        setSuccess(true);
+        alert(
+          `${action} for ${person?.fname} ${person?.lname} submitted successfully!`
+        );
+        if (action === "Confirm & Hire") {
+          hireArtisan();
+        }
+      } else {
+        setError(response.data.message || "Submission failed.");
+      }
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+          "Network error. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  // Check if data is still loading
   if (isLoading) {
     return (
       <div className="div-container">
@@ -95,13 +121,12 @@ function HiringartisanPage() {
     );
   }
 
-  // Check if person is found
   if (!person) {
     return (
       <div className="div-container">
         <h1>Person Not Found</h1>
         <p>Could not find tradesperson with ID: {id}</p>
-        <p>
+<p>
           Debug info:{" "}
           {sessionStorage.getItem("selectedTradesPerson")
             ? "User exists in session storage"
@@ -124,7 +149,6 @@ function HiringartisanPage() {
               className="viewprofile-img"
               alt={person.fname}
             />
-
             <div className="profile-details">
               <h2 className="viewprofile-name">
                 {person.fname} {person.lname}
@@ -132,7 +156,6 @@ function HiringartisanPage() {
                   <i className="fa-solid fa-circle-check verification-icon"></i>
                 )}
               </h2>
-
               <p className="viewprofile-expertise">
                 <strong>Expertise:</strong> {person.expertise}
               </p>
@@ -289,19 +312,25 @@ function HiringartisanPage() {
           <button
             className="quote-btn"
             type="button"
-            onClick={(e) => handleSubmit(e, "Request A Quote")}
+          
           >
             Request A Quote
           </button>
           <button
-            onClick={hireArtisan}
             className="hiring-btn"
             id="hire"
             type="submit"
+            disabled={submitting}
           >
-            Confirm & Hire
+            {submitting ? "Submitting..." : "Confirm & Hire"}
           </button>
         </div>
+        {/* {error && <div className="error-message">{error}</div>}
+        {success && (
+          <div className="success-message">
+            Your request has been submitted successfully!
+          </div>
+        )} */}
       </form>
     </div>
   );
