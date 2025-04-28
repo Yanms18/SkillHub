@@ -189,7 +189,7 @@ const ViewProfile = () => {
           <div className="video-container">
             <video
               className="bio-video"
-              src={user.video || defaultImageUrl}
+              src={user.videoURL || defaultImageUrl}
               alt="An introductory video"
               controls
             ></video>
