@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/nextstep.css";
 import { uploadImageToImgbb } from "../utils/imageUpload";
+import { uploadVideoToCloudinary } from "../utils/videoUpload"; // Update: now Cloudinary
 
 function Nextstep() {
   const Navigate = useNavigate();
@@ -129,6 +130,43 @@ function Nextstep() {
   // Function to trigger file input click
   const triggerFileInput = () => {
     fileInputRef.current.click();
+  };
+
+  // New state for video
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoUploading, setVideoUploading] = useState(false);
+  const [videoError, setVideoError] = useState("");
+  const [videoURL, setVideoURL] = useState(formData.videoURL || "");
+
+  // Handle video file selection
+  const handleVideoChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setVideoFile(file);
+    setVideoError("");
+  };
+
+  // Upload video to Cloudinary
+  const uploadVideo = async () => {
+    if (!videoFile) return;
+    setVideoUploading(true);
+    setVideoError("");
+    try {
+      const result = await uploadVideoToCloudinary(
+        videoFile,
+        formData.full_name || "intro_video",
+        "Introductory video"
+      );
+      setVideoURL(result.secure_url);
+      setFormData((prev) => ({
+        ...prev,
+        videoURL: result.secure_url,
+      }));
+    } catch (err) {
+      setVideoError("Video upload failed. " + err.message);
+    } finally {
+      setVideoUploading(false);
+    }
   };
 
   return (
@@ -352,9 +390,36 @@ function Nextstep() {
                 </span>
               </label>
               <div className="video-upload">
-                <div className="dotted-border-video">
+                <div className="dotted-border-video" onClick={() => document.getElementById("intro-video").click()}>
                   <img src="/images/videocam.png" alt="video camera" />
                 </div>
+                <input
+                  type="file"
+                  id="intro-video"
+                  accept="video/*"
+                  style={{ display: "none" }}
+                  onChange={handleVideoChange}
+                />
+                {videoFile && (
+                  <div style={{ marginTop: 10 }}>
+                    <button
+                      type="button"
+                      className="confirm-image-btn"
+                      onClick={uploadVideo}
+                      disabled={videoUploading}
+                    >
+                      {videoUploading ? "Uploading..." : "Upload Video"}
+                    </button>
+                  </div>
+                )}
+                {videoURL && (
+                  <div style={{ marginTop: 10 }}>
+                    <a href={videoURL} target="_blank" rel="noopener noreferrer">
+                      View Uploaded Video
+                    </a>
+                  </div>
+                )}
+                {videoError && <p className="error-message">{videoError}</p>}
               </div>
             </div>
           </div>

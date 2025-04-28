@@ -93,9 +93,9 @@ console.log (payload)
       );
       if (response.status === 200 || response.status === 201) {
         setSuccess(true);
-        alert(
-          `${action} for ${person?.fname} ${person?.lname} submitted successfully!`
-        );
+        // alert(
+        //   `${action} for ${person?.fname} ${person?.lname} submitted successfully!`
+        // );
         if (action === "Confirm & Hire") {
           hireArtisan();
         }
